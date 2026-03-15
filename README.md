@@ -1,28 +1,31 @@
 🚀 Amdox Task Management System
 
-A full-stack task management application built using Java Spring Boot and React that helps teams organize tasks, track progress, and collaborate efficiently.
-The system provides secure authentication, role-based access control, Kanban workflow management, and real-time collaboration tools.
+A full-stack task management application built using Java Spring Boot, React, and MySQL to help teams organize work, track progress, and collaborate efficiently.
 
-📌 Project Overview
+The system provides secure authentication, role-based access control, Kanban workflow management, and real-time task collaboration.
 
-The Amdox Task Management System enables teams to manage tasks in a structured workflow. Users can create tasks, assign them to team members, track deadlines, and collaborate through comments.
+📌 Overview
 
-The application follows a modern full-stack architecture:
+The Amdox Task Management System allows users to create, assign, and monitor tasks through a simple and interactive interface.
 
-Frontend: React for interactive user interface
+Users can:
 
-Backend: Spring Boot REST APIs
+Create and manage tasks
 
-Database: MySQL
+Assign tasks to team members
 
-Security: JWT-based authentication
+Track deadlines and priorities
 
-🏗️ Technology Stack
+Collaborate using task comments
+
+Visualize workflow using a Kanban board
+
+🛠 Tech Stack
 Backend
 
 Java 17
 
-Spring Boot 3
+Spring Boot
 
 Spring Security
 
@@ -30,77 +33,85 @@ JWT Authentication
 
 Spring Data JPA (Hibernate)
 
-MySQL Database
+MySQL
 
 Maven
-
-Lombok
 
 Frontend
 
 React 18
 
-React Router v6
+React Router
 
 Bootstrap 5
 
 Axios
 
-JavaScript ES6
+JavaScript (ES6)
 
 ✨ Key Features
 🔐 Secure Authentication
 
-User Registration & Login
+User registration and login
 
-JWT Token-based Authentication
+JWT token-based authentication
 
-Password Encryption using BCrypt
+Password encryption using BCrypt
 
 👥 Role-Based Access Control
-Role	Permissions
-ADMIN	Full system access
-EDITOR	Create and update own tasks
+Role	Access
+ADMIN	Full access to system
+EDITOR	Create and edit tasks
 VIEWER	Read-only access
 📋 Task Management
 
-Create, Update, Delete tasks
+Create, update, and delete tasks
 
-Task priorities (HIGH, MEDIUM, LOW)
+Assign tasks to users
 
-Task status tracking (TODO, IN_PROGRESS, DONE)
+Track deadlines
 
-Task assignment to users
+Manage task priorities and status
 
-Due date management
+Task Priorities
+
+🔴 HIGH
+
+🟡 MEDIUM
+
+🟢 LOW
+
+Task Status
+
+TODO
+
+IN_PROGRESS
+
+DONE
 
 📊 Kanban Workflow
 
-Visual Kanban board
+The application includes a Kanban board for visual task management.
 
-Drag & Drop task updates
+Columns include:
 
-Color-coded priorities
+📌 TODO
 
-Real-time task status updates
+⚙️ IN PROGRESS
+
+✅ DONE
+
+Users can drag and drop tasks between columns to update their progress.
 
 🤝 Collaboration
 
-Comment system for tasks
+Add comments to tasks
 
-Task assignment
+Assign tasks to team members
 
-Task history tracking
+Track task activity and updates
 
-📈 Analytics
-
-Overdue task detection
-
-Task completion reports
-
-User productivity tracking
-
-🗄️ Database Design
+🗄 Database Design
 Users Table
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -138,7 +149,7 @@ CREATE TABLE comments (
 📁 Project Structure
 amdox-task-management
 │
-├── backend
+├── task-management-backend
 │   ├── controller
 │   ├── service
 │   ├── repository
@@ -147,19 +158,17 @@ amdox-task-management
 │   ├── security
 │   └── TaskManagerApplication.java
 │
-├── frontend
-│   ├── pages
+├── task-management-frontend
 │   ├── components
+│   ├── pages
 │   ├── services
 │   ├── App.js
 │   └── index.js
 │
 ├── database-init.sql
 └── README.md
-⚙️ Setup Instructions
-Prerequisites
-
-Install the following:
+⚙️ Setup Guide
+Requirements
 
 Java 17+
 
@@ -177,7 +186,7 @@ cd task-management-backend
 mvn clean install
 mvn spring-boot:run
 
-Backend runs on:
+Backend runs at:
 
 http://localhost:8080/api
 3️⃣ Frontend Setup
@@ -185,110 +194,34 @@ cd task-management-frontend
 npm install
 npm start
 
-Frontend runs on:
+Frontend runs at:
 
 http://localhost:3000
-📡 API Overview
-Authentication APIs
-Register
+📡 API Endpoints
+Authentication
 POST /api/auth/register
-Login
 POST /api/auth/login
-Task APIs
+Tasks
 GET    /api/tasks
 POST   /api/tasks
 PUT    /api/tasks/{id}
 DELETE /api/tasks/{id}
 GET    /api/tasks/overdue/list
-Comment APIs
+Comments
 POST   /api/tasks/{taskId}/comments
 GET    /api/tasks/{taskId}/comments
 DELETE /api/tasks/{taskId}/comments/{commentId}
-🌐 Deployment
-Backend Deployment
+🔮 Future Improvements
 
-Build the JAR file:
+Email notifications for task updates
 
-mvn clean package
+File attachments for tasks
 
-Run the application:
+Real-time updates using WebSockets
 
-java -jar task-management-backend-1.0.0.jar
+Advanced search and filtering
 
-Supported deployment platforms:
-
-AWS EC2
-
-Railway
-
-Render
-
-Frontend Deployment
-
-Build React project:
-
-npm run build
-
-Deploy to:
-
-Netlify
-
-Vercel
-
-💡 Interview Questions
-Explain the Architecture
-
-The project follows a three-tier architecture:
-
-Frontend Layer: React UI
-
-Backend Layer: Spring Boot REST APIs
-
-Data Layer: MySQL database
-
-How JWT Authentication Works
-
-User logs in with credentials
-
-Server generates JWT token
-
-Token is stored on client side
-
-Every request sends token in Authorization header
-
-Backend validates token before processing requests
-
-Key Improvements (Future Scope)
-
-Email notifications
-
-File attachments
-
-Real-time updates using WebSocket
-
-Advanced search and filters
-
-Team workspaces
-
-🧪 Test Accounts
-
-Admin
-
-Email: admin@amdox.com
-Password: password123
-
-Editor
-
-Email: john@amdox.com
-Password: password123
-
-Viewer
-
-Email: jane@amdox.com
-Password: password123
-📜 License
-
-This project is created for learning and academic purposes.
+Analytics dashboard
 
 👨‍💻 Author
 
