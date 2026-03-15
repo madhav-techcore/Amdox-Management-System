@@ -146,27 +146,29 @@ CREATE TABLE comments (
     FOREIGN KEY (task_id) REFERENCES tasks(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-'''📁 Project Structure
-amdox-task-management
-│
-├── task-management-backend
-│   ├── controller
-│   ├── service
-│   ├── repository
-│   ├── model
-│   ├── dto
-│   ├── security
+## 📁 Project Structure
+
+```
+amdox-task-management/
+├── task-management-backend/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   ├── model/
+│   ├── dto/
+│   ├── security/
 │   └── TaskManagerApplication.java
 │
-├── task-management-frontend
-│   ├── components
-│   ├── pages
-│   ├── services
+├── task-management-frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
 │   ├── App.js
 │   └── index.js
 │
 ├── database-init.sql
-└── README.md'''
+└── README.md
+```
 ⚙️ Setup Guide
 Requirements
 
