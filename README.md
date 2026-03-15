@@ -1,80 +1,107 @@
-# 🚀 Amdox Task Management System
+🚀 Amdox Task Management System
 
-A **complete Java Full-Stack application** for managing tasks efficiently with secure authentication, role-based access, Kanban workflow, real-time collaboration, and deadline tracking.
+A full-stack task management application built using Java Spring Boot and React that helps teams organize tasks, track progress, and collaborate efficiently.
+The system provides secure authentication, role-based access control, Kanban workflow management, and real-time collaboration tools.
 
----
+📌 Project Overview
 
-## 📋 Table of Contents
+The Amdox Task Management System enables teams to manage tasks in a structured workflow. Users can create tasks, assign them to team members, track deadlines, and collaborate through comments.
 
-- [Technology Stack](#technology-stack)
-- [Features](#features)
-- [Database Design](#database-design)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [API Documentation](#api-documentation)
-- [Deployment](#deployment)
-- [Interview Q&A](#interview-qa)
+The application follows a modern full-stack architecture:
 
----
+Frontend: React for interactive user interface
 
-## 🏗️ Technology Stack
+Backend: Spring Boot REST APIs
 
-### Backend
-- **Java 17** with **Spring Boot 3.2.0**
-- **Spring Security** with **JWT Token** Authentication
-- **Spring Data JPA** with **Hibernate** ORM
-- **MySQL 8.0** Database
-- **Lombok** for code generation
-- **Maven** Build Tool
+Database: MySQL
 
-### Frontend
-- **React 18** with **React Router v6**
-- **Bootstrap 5** for UI
-- **Axios** for API calls
-- **JavaScript ES6+**
+Security: JWT-based authentication
 
----
+🏗️ Technology Stack
+Backend
 
-## ✨ Features
+Java 17
 
-### 1. **Secure Authentication**
-- User registration & login
-- JWT token-based authentication
-- Password encryption (BCrypt)
+Spring Boot 3
 
-### 2. **Role-Based Access Control**
-- **ADMIN**: Full access to all tasks and users
-- **EDITOR**: Create, edit own tasks
-- **VIEWER**: Read-only access
+Spring Security
 
-### 3. **Task Management**
-- Create, Read, Update, Delete (CRUD) tasks
-- Task priorities (HIGH, MEDIUM, LOW)
-- Task status (TODO, IN_PROGRESS, DONE)
-- Due date tracking
-- Task assignment to users
+JWT Authentication
 
-### 4. **Kanban Board**
-- Drag-and-drop task movements
-- Color-coded priorities
-- Real-time status updates
+Spring Data JPA (Hibernate)
 
-### 5. **Collaboration**
-- Comments on tasks
-- User assignment
-- Task history tracking
+MySQL Database
 
-### 6. **Analytics**
-- Overdue task tracking
-- Task completion reports
-- User productivity metrics
+Maven
 
----
+Lombok
 
-## 🗄️ Database Design
+Frontend
 
-### Users Table
-```sql
+React 18
+
+React Router v6
+
+Bootstrap 5
+
+Axios
+
+JavaScript ES6
+
+✨ Key Features
+🔐 Secure Authentication
+
+User Registration & Login
+
+JWT Token-based Authentication
+
+Password Encryption using BCrypt
+
+👥 Role-Based Access Control
+Role	Permissions
+ADMIN	Full system access
+EDITOR	Create and update own tasks
+VIEWER	Read-only access
+📋 Task Management
+
+Create, Update, Delete tasks
+
+Task priorities (HIGH, MEDIUM, LOW)
+
+Task status tracking (TODO, IN_PROGRESS, DONE)
+
+Task assignment to users
+
+Due date management
+
+📊 Kanban Workflow
+
+Visual Kanban board
+
+Drag & Drop task updates
+
+Color-coded priorities
+
+Real-time task status updates
+
+🤝 Collaboration
+
+Comment system for tasks
+
+Task assignment
+
+Task history tracking
+
+📈 Analytics
+
+Overdue task detection
+
+Task completion reports
+
+User productivity tracking
+
+🗄️ Database Design
+Users Table
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
@@ -83,10 +110,7 @@ CREATE TABLE users (
     role VARCHAR(20),
     active BOOLEAN
 );
-```
-
-### Tasks Table
-```sql
+Tasks Table
 CREATE TABLE tasks (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100),
@@ -101,10 +125,7 @@ CREATE TABLE tasks (
     FOREIGN KEY (assigned_to) REFERENCES users(id),
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
-```
-
-### Comments Table
-```sql
+Comments Table
 CREATE TABLE comments (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     message TEXT,
@@ -114,470 +135,161 @@ CREATE TABLE comments (
     FOREIGN KEY (task_id) REFERENCES tasks(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-```
-
----
-
-## 📁 Project Structure
-
-```
-amdox-task-management/
-├── task-management-backend/
-│   ├── src/main/java/com/amdox/taskmanager/
-│   │   ├── controller/
-│   │   │   ├── AuthController.java
-│   │   │   ├── TaskController.java
-│   │   │   └── CommentController.java
-│   │   ├── service/
-│   │   │   ├── AuthService.java
-│   │   │   ├── TaskService.java
-│   │   │   └── CommentService.java
-│   │   ├── repository/
-│   │   │   ├── UserRepository.java
-│   │   │   ├── TaskRepository.java
-│   │   │   └── CommentRepository.java
-│   │   ├── model/
-│   │   │   ├── User.java
-│   │   │   ├── Task.java
-│   │   │   └── Comment.java
-│   │   ├── dto/
-│   │   │   ├── LoginRequest.java
-│   │   │   ├── RegisterRequest.java
-│   │   │   ├── AuthResponse.java
-│   │   │   ├── TaskRequest.java
-│   │   │   └── CommentRequest.java
-│   │   ├── security/
-│   │   │   ├── JwtTokenProvider.java
-│   │   │   ├── JwtInterceptor.java
-│   │   │   └── WebConfig.java
-│   │   └── TaskManagerApplication.java
-│   ├── src/main/resources/
-│   │   └── application.properties
-│   └── pom.xml
+📁 Project Structure
+amdox-task-management
 │
-├── task-management-frontend/
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── LoginPage.js
-│   │   │   ├── RegisterPage.js
-│   │   │   └── Dashboard.js
-│   │   ├── components/
-│   │   │   ├── Navbar.js
-│   │   │   ├── TaskForm.js
-│   │   │   ├── TaskList.js
-│   │   │   ├── TaskItem.js
-│   │   │   └── KanbanBoard.js
-│   │   ├── services/
-│   │   │   └── api.js
-│   │   ├── App.js
-│   │   ├── index.js
-│   │   └── index.css
-│   ├── public/
-│   │   └── index.html
-│   └── package.json
+├── backend
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── model
+│   ├── dto
+│   ├── security
+│   └── TaskManagerApplication.java
+│
+├── frontend
+│   ├── pages
+│   ├── components
+│   ├── services
+│   ├── App.js
+│   └── index.js
 │
 ├── database-init.sql
 └── README.md
-```
+⚙️ Setup Instructions
+Prerequisites
 
----
+Install the following:
 
-## 🚀 Setup Instructions
+Java 17+
 
-### Prerequisites
-- **Java 17** or higher
-- **Node.js 16+** & **npm**
-- **MySQL 8.0+**
-- **Maven 3.8+**
+Node.js
 
-### Step 1: Database Setup
+MySQL
 
-```bash
-# Connect to MySQL
+Maven
+
+1️⃣ Database Setup
 mysql -u root -p
-
-# Run the initialization script
 mysql -u root -p < database-init.sql
-```
-
-### Step 2: Backend Setup
-
-```bash
+2️⃣ Backend Setup
 cd task-management-backend
-
-# Install dependencies
 mvn clean install
-
-# Update MySQL credentials in src/main/resources/application.properties
-# Default:
-# spring.datasource.username=root
-# spring.datasource.password=
-
-# Run Spring Boot application
 mvn spring-boot:run
 
-# Backend runs on: http://localhost:8080/api
-```
+Backend runs on:
 
-### Step 3: Frontend Setup
-
-```bash
+http://localhost:8080/api
+3️⃣ Frontend Setup
 cd task-management-frontend
-
-# Install dependencies
 npm install
-
-# Start React development server
 npm start
 
-# Frontend runs on: http://localhost:3000
-```
+Frontend runs on:
 
----
-
-## 📡 API Documentation
-
-### Authentication APIs
-
-#### Register
-```
+http://localhost:3000
+📡 API Overview
+Authentication APIs
+Register
 POST /api/auth/register
-Content-Type: application/json
-
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123",
-  "role": "VIEWER"
-}
-
-Response: 201 Created
-{
-  "token": "eyJhbGciOiJIUzI1NiIs...",
-  "message": "User registered successfully",
-  "userId": 1,
-  "userName": "John Doe",
-  "role": "VIEWER"
-}
-```
-
-#### Login
-```
+Login
 POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-
-Response: 200 OK
-{
-  "token": "eyJhbGciOiJIUzI1NiIs...",
-  "message": "Login successful",
-  "userId": 1,
-  "userName": "John Doe",
-  "role": "VIEWER"
-}
-```
-
-### Task APIs
-
-#### Get All Tasks
-```
-GET /api/tasks
-Authorization: Bearer <token>
-
-Response: 200 OK
-[
-  {
-    "id": 1,
-    "title": "Complete project report",
-    "description": "Finish quarterly report",
-    "priority": "HIGH",
-    "status": "IN_PROGRESS",
-    "dueDate": "2024-12-31",
-    "assignedTo": {...},
-    "createdBy": {...},
-    "createdAt": "2024-02-03T10:30:00"
-  }
-]
-```
-
-#### Create Task
-```
-POST /api/tasks
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Complete project report",
-  "description": "Finish quarterly report",
-  "priority": "HIGH",
-  "status": "TODO",
-  "dueDate": "2024-12-31",
-  "assignedToId": 2
-}
-
-Response: 201 Created
-```
-
-#### Update Task
-```
-PUT /api/tasks/{id}
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Updated title",
-  "status": "DONE",
-  "priority": "MEDIUM"
-}
-
-Response: 200 OK
-```
-
-#### Delete Task
-```
+Task APIs
+GET    /api/tasks
+POST   /api/tasks
+PUT    /api/tasks/{id}
 DELETE /api/tasks/{id}
-Authorization: Bearer <token>
-
-Response: 204 No Content
-```
-
-#### Get Overdue Tasks
-```
-GET /api/tasks/overdue/list
-Authorization: Bearer <token>
-
-Response: 200 OK
-[...]
-```
-
-### Comment APIs
-
-#### Add Comment
-```
-POST /api/tasks/{taskId}/comments
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "message": "This task is progressing well"
-}
-
-Response: 201 Created
-```
-
-#### Get Task Comments
-```
-GET /api/tasks/{taskId}/comments
-Authorization: Bearer <token>
-
-Response: 200 OK
-[...]
-```
-
-#### Delete Comment
-```
+GET    /api/tasks/overdue/list
+Comment APIs
+POST   /api/tasks/{taskId}/comments
+GET    /api/tasks/{taskId}/comments
 DELETE /api/tasks/{taskId}/comments/{commentId}
-Authorization: Bearer <token>
+🌐 Deployment
+Backend Deployment
 
-Response: 204 No Content
-```
+Build the JAR file:
 
----
+mvn clean package
 
-## 🌐 Deployment
+Run the application:
 
-### Deploy Backend to AWS/Railway
+java -jar task-management-backend-1.0.0.jar
 
-1. **Build JAR**
-   ```bash
-   mvn clean package
-   ```
+Supported deployment platforms:
 
-2. **Deploy to AWS EC2**
-   ```bash
-   # Upload JAR and run
-   java -jar task-management-backend-1.0.0.jar
-   ```
+AWS EC2
 
-3. **Deploy to Railway**
-   - Connect Git repository
-   - Set environment variables
-   - Auto-deploy on push
+Railway
 
-### Deploy Frontend to Netlify/Vercel
+Render
 
-1. **Build React App**
-   ```bash
-   npm run build
-   ```
+Frontend Deployment
 
-2. **Deploy to Netlify**
-   - Drag & drop `build` folder
-   - Or connect GitHub repo for auto-deploy
+Build React project:
 
-3. **Deploy to Vercel**
-   ```bash
-   npm install -g vercel
-   vercel --prod
-   ```
+npm run build
 
-### Production Environment Variables
+Deploy to:
 
-**Backend (application.properties)**
-```properties
-spring.datasource.url=jdbc:mysql://prod-db-host:3306/amdox_taskdb
-spring.datasource.username=${DB_USERNAME}
-spring.datasource.password=${DB_PASSWORD}
-jwt.secret=${JWT_SECRET}
-```
+Netlify
 
-**Frontend (.env)**
-```
-REACT_APP_API_URL=https://api.amdox-tasks.com
-```
+Vercel
 
----
+💡 Interview Questions
+Explain the Architecture
 
-## 💡 Interview Q&A
+The project follows a three-tier architecture:
 
-### Q1: Explain the project architecture
-**A:** This is a **Java Full-Stack** application using:
-- **Frontend**: React for interactive UI
-- **Backend**: Spring Boot for REST APIs
-- **Database**: MySQL for persistent storage
-- **Security**: JWT tokens for stateless authentication
+Frontend Layer: React UI
 
-### Q2: How does JWT authentication work?
-**A:**
-1. User logs in with email & password
-2. Backend validates and generates a JWT token
-3. Frontend stores token in localStorage
-4. For every request, token is sent in Authorization header
-5. Backend validates token and extracts user info via JwtTokenProvider
+Backend Layer: Spring Boot REST APIs
 
-### Q3: What's the role-based access control?
-**A:**
-- **ADMIN**: Can view/edit all tasks, manage users
-- **EDITOR**: Can create & edit own tasks
-- **VIEWER**: Can only view tasks
+Data Layer: MySQL database
 
-### Q4: How does the Kanban board work?
-**A:**
-- Tasks are displayed in 3 columns: TODO, IN_PROGRESS, DONE
-- Drag-and-drop functionality moves tasks between columns
-- Frontend updates task status via API
-- Backend validates permission before updating
+How JWT Authentication Works
 
-### Q5: What are the key features?
-**A:**
-- Secure authentication with JWT
-- Role-based authorization
-- CRUD operations on tasks
-- Task assignment & tracking
-- Comment collaboration
-- Kanban workflow visualization
-- Overdue task alerts
-- Responsive design
+User logs in with credentials
 
-### Q6: What's the database relationship?
-**A:**
-- Users table stores user credentials & roles
-- Tasks table has foreign keys to Users (assigned_to, created_by)
-- Comments table has foreign keys to Tasks and Users
-- One-to-many relationship: User → Tasks, Task → Comments
+Server generates JWT token
 
-### Q7: How do you handle errors?
-**A:**
-- Backend validates input before processing
-- Proper HTTP status codes (200, 201, 400, 401, 403, 404, 500)
-- Frontend catches errors and shows user-friendly messages
-- JWT validation prevents unauthorized access
+Token is stored on client side
 
-### Q8: What improvements can be added?
-**A:**
-- Email notifications for task assignments
-- File attachments to tasks
-- Real-time updates using WebSocket
-- Advanced search & filtering
-- Analytics dashboard
-- Recurring tasks
-- Team collaboration spaces
+Every request sends token in Authorization header
 
----
+Backend validates token before processing requests
 
-## 🧪 Testing the Application
+Key Improvements (Future Scope)
 
-### Test Account Credentials
-```
-Admin:
+Email notifications
+
+File attachments
+
+Real-time updates using WebSocket
+
+Advanced search and filters
+
+Team workspaces
+
+🧪 Test Accounts
+
+Admin
+
 Email: admin@amdox.com
 Password: password123
 
-Editor:
+Editor
+
 Email: john@amdox.com
 Password: password123
 
-Viewer:
+Viewer
+
 Email: jane@amdox.com
 Password: password123
-```
+📜 License
 
-### Test Scenarios
+This project is created for learning and academic purposes.
 
-1. **Authentication**
-   - Register new user
-   - Login with credentials
-   - Logout functionality
-   - Token expiration
+👨‍💻 Author
 
-2. **Task Management**
-   - Create task with all fields
-   - Update task status
-   - Delete task
-   - Filter by status/priority
-
-3. **Kanban Board**
-   - Drag task between columns
-   - Update status in real-time
-   - Color coding by priority
-
-4. **Authorization**
-   - EDITOR cannot delete other's tasks
-   - VIEWER cannot create tasks
-   - ADMIN can access everything
-
----
-
-## 📚 Resources
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [React Documentation](https://react.dev)
-- [JWT Best Practices](https://tools.ietf.org/html/rfc7519)
-- [MySQL Documentation](https://dev.mysql.com/doc/)
-
----
-
-## 📞 Support
-
-For issues or questions:
-1. Check the database is running
-2. Verify MySQL credentials
-3. Check API endpoint URLs
-4. Review browser console for errors
-5. Check backend logs for exceptions
-
----
-
-## 📝 License
-
-This project is part of the Amdox Task Management System course/assignment.
-
----
-
-**Created**: February 3, 2026  
-**Version**: 1.0.0  
-**Status**: Production Ready ✅
+Nyathari Madhav
